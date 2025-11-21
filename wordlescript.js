@@ -13,6 +13,9 @@ let words_matrix = [
 
 ];
 
+const correct_letter_color = "#22d637";
+const partial_letter_color = "#f7c719";
+
 let current_word   = 0;
 let current_letter = 0;
 const MAX_WORD_LENGTH = 4;
@@ -25,20 +28,36 @@ document.addEventListener('keydown', (event) => {
 	
 	if( event.key === 'Enter' && current_letter > MAX_WORD_LENGTH ){
 	
+		let correct_letters = 0;
+	
 		for( let i = 0; i <= MAX_WORD_LENGTH; i++ ){
 			
 			if( solution[i] == words_matrix[current_word][i] ){
 			
 				const cellID = `cell_${current_word}_${i}`;
 				const cell = document.getElementById(cellID);
-				cell.style.backgroundColor = "lightgreen";
+				cell.style.backgroundColor = correct_letter_color;
+				
+				correct_letters++;
+			
+			}
+			
+			else if( words_matrix[current_word].includes(solution[i]) ){
+				
+				const cellID = `cell_${current_word}_${i}`;
+				const cell = document.getElementById(cellID);
+				cell.style.backgroundColor = partial_letter_color;
 			
 			}
 		
 		}
 	
 		current_letter = 0;
-		current_word++;	
+		current_word++;
+		
+		if( correct_letters == 5 || current_word > 5 ){
+			GAME_OVER = true;
+		}
 		
 	}
 	
