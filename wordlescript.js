@@ -19,7 +19,12 @@ let current_letter = 0;
 document.addEventListener('keydown', (event) => {
 	
 	if( event.key === 'Enter' ){
-		console.log("enter D:");
+		
+		if( current_letter > 4 ){
+			current_letter = 0;
+			current_word++;
+		}
+		
 	}
 	
 	else if( event.key === 'Backspace' ){
@@ -38,20 +43,21 @@ document.addEventListener('keydown', (event) => {
 
 	else if ( event.key >= 'a' && event.key <= 'z' ) {
 		
-		const new_letter = event.key.toUpperCase();
+		if(current_letter < 5){
+			
+			const new_letter = event.key.toUpperCase();
 		
-		words_matrix[current_word][current_letter] = new_letter;
+			words_matrix[current_word][current_letter] = new_letter;
 		
-		const cellID = `cell_${current_word}_${current_letter}`;
-		const cell = document.getElementById(cellID);
+			const cellID = `cell_${current_word}_${current_letter}`;
+			const cell = document.getElementById(cellID);
         
-		cell.textContent = new_letter;
+			cell.textContent = new_letter;
+			
+			current_letter++;
 		
-		current_letter++;
-		if(current_letter > 4){
-			current_word++;
-			current_letter = 0;
 		}
+
 	}
    
 });
