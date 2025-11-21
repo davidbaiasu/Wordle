@@ -48,7 +48,7 @@ document.addEventListener('keydown', (event) => {
 				const cell = document.getElementById(cellID);
 				cell.style.backgroundColor = partial_letter_color;
 			
-			}
+			} /// bug : REIGN colors G for case "CRANE"
 		
 		}
 	
